@@ -1,4 +1,4 @@
-const Uploader = require('../src/index.js');
+import Uploader from '../src/index.js';
 
 const expect = require('chai').expect;
 

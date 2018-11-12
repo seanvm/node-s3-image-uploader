@@ -4,7 +4,7 @@
   "description": "A simple wrapper of AWS s3 API for uploading images to s3.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "mocha test/*.test.js",
+    "test": "mocha --require @babel/register test/*.test.js",
     "build": "./node_modules/.bin/babel src --out-dir lib",
     "prepare": "npm run build"
   },
@@ -21,6 +21,7 @@
     "@babel/cli": "^7.1.5",
     "@babel/core": "^7.1.5",
     "@babel/preset-env": "^7.1.5",
+    "@babel/register": "^7.0.0",
     "babel-eslint": "^10.0.1",
     "chai": "^4.2.0",
     "eslint": "^5.9.0",
