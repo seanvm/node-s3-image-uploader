@@ -9,6 +9,12 @@ class Uploader {
 
     this.bucketName = bucketName;
     this.options = options;
+
+    this.buffer = null;
+    this.fileExt = null;
+    this.fileType = null;
+    this.payload = {};
+    this.fileName = '';
   }
 
   upload(image) {
@@ -16,16 +22,20 @@ class Uploader {
   }
 
   setupImage(image) {
-    let buffer = Buffer.from(image, 'base64');
-    let fileMime = fileType(buffer);
-    this.validateImage(fileMime);
+    this.buffer = Buffer.from(image, 'base64');
+    this.fileMime = fileType(this.buffer);
+    this.validateImage();
   }
 
-  validateImage(fileMime) {
-    if (fileMime === null) {
+  validateImage() {
+    if (this.fileMime === null) {
       throw new Error('Invalid file type.');
     }
   }
+  getFilePath() {
+    return typeof this.options.filePath === 'undefined' ? '/' : this.options.filePath;
+  }
+
 };
 
 module.exports = Uploader;

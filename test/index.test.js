@@ -18,4 +18,12 @@ describe('Uploader', () => {
       expect(() => uploader.upload(statics.invalidImage)).to.throw('Invalid file type.');
     });
   });
+
+  describe('getFilePath()', () => {
+    it('should return the user specified path', () => {
+      let options = { filePath: '/img' };
+      var uploader = new Uploader('xyz.com', options);
+      expect(uploader.getFilePath()).to.equal('/img');
+    });
+  });
 });
