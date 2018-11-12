@@ -1,10 +1,10 @@
 {
-  "name": "image-uploader",
+  "name": "node-s3-image-uploader",
   "version": "1.0.0",
-  "description": "",
+  "description": "A simple wrapper for the AWS s3 API for the purpose of uploading images to s3.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test/*.test.js"
   },
   "author": "",
   "license": "ISC",
