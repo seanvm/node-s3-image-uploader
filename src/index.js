@@ -2,6 +2,7 @@
 
 const AWS = require('aws-sdk');
 const fileType = require('file-type');
+const randomstring = require('randomstring');
 
 class Uploader {
   constructor(bucketName, options = {}) {
@@ -19,12 +20,14 @@ class Uploader {
 
   upload(image) {
     this.setupImage(image);
+    this.buildPayload();
   }
 
   setupImage(image) {
     this.buffer = Buffer.from(image, 'base64');
     this.fileMime = fileType(this.buffer);
     this.validateImage();
+    this.setFileInformation();
   }
 
   validateImage() {
@@ -32,10 +35,22 @@ class Uploader {
       throw new Error('Invalid file type.');
     }
   }
+
+  buildPayload() {
+
+  }
+
   getFilePath() {
     return typeof this.options.filePath === 'undefined' ? '/' : this.options.filePath;
   }
 
+  setFileInformation() {
+    this.fileExt = this.fileMime.ext;
+    this.fileType = this.fileMime.mime;
+
+    this.fileName = randomstring.generate() + '.' + this.fileExt;
+    this.fileSize = this.buffer.toString('ascii').length;
+  }
 };
 
 module.exports = Uploader;
