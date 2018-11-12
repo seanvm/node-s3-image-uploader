@@ -1,11 +1,11 @@
-const Uploader = require('../index.js');
+const Uploader = require('../src/index.js');
 
 const expect = require('chai').expect;
 
 describe('Uploader', () => {
   describe('constructor', () => {
     it('should throw an error for missing bucketName parameter', () => {
-      var newUploaderFcn = () => new Uploader(null, null);
+      var newUploaderFcn = () => new Uploader();
       expect(newUploaderFcn).to.throw('bucketName is required');
     });
   });
