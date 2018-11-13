@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+
 import Uploader from '../src/index.js';
 
 import statics from './resources/statics';
@@ -7,35 +9,51 @@ const chai = require('chai');
 const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');
 
-// set up the middleware
 chai.use(chaiAsPromised);
 
 describe('Uploader', () => {
   describe('constructor', () => {
     it('should throw an error for missing bucketName parameter', () => {
-      var newUploaderFcn = () => new Uploader();
+      let newUploaderFcn = () => new Uploader();
       expect(newUploaderFcn).to.throw('bucketName is required.');
     });
   });
 
   describe('upload()', () => {
     it('should throw an error for an invalid file type', async() => {
-      var uploader = new Uploader('xyz.com');
+      let uploader = new Uploader('xyz.com');
       await expect(
         uploader.upload(statics.invalidImage)
       ).to.be.rejectedWith('Invalid file type.');
     });
   });
 
+  describe('setupImage()', function() {
+    before(function() {
+      this.uploader = new Uploader('xyz.com');
+      this.uploader.setupImage(statics.validImage);
+    });
+
+    it('should create a valid buffer', function() {
+      let isBuffer = Buffer.isBuffer(this.uploader.buffer);
+      expect(isBuffer).to.be.true;
+    });
+
+    it('should set the fileMime', function() {
+      let fileMime = { ext: 'jpg', mime: 'image/jpeg' };
+      expect(this.uploader.fileMime).to.deep.equal(fileMime);
+    });
+  });
+
   describe('getFilePath()', () => {
     it('should return the user specified path', () => {
       let options = { filePath: 'img/' };
-      var uploader = new Uploader('xyz.com', options);
+      let uploader = new Uploader('xyz.com', options);
       expect(uploader.getFilePath()).to.equal('img/');
     });
 
     it('should default to root if no user specified path', () => {
-      var uploader = new Uploader('xyz.com');
+      let uploader = new Uploader('xyz.com');
       expect(uploader.getFilePath()).to.equal('');
     });
   });
