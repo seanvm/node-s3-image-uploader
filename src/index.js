@@ -56,6 +56,7 @@ class Uploader {
   }
 
   generateFileName() {
+    // TODO: Allow for this to be passed via options
     return randomstring.generate() + '.' + this.fileExt;
   }
 
