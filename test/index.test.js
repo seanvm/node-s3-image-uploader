@@ -29,7 +29,7 @@ describe('Uploader', () => {
 
     it('should default to root if no user specified path', () => {
       var uploader = new Uploader('xyz.com');
-      expect(uploader.getFilePath()).to.equal('/');
+      expect(uploader.getFilePath()).to.equal('');
     });
   });
 
@@ -39,15 +39,15 @@ describe('Uploader', () => {
       let uploader = new Uploader('xyz.com', options);
 
       let generateFileNameStub = function() {
-        return 'file1';
+        return 'file1.jpg';
       };
       sinon.stub(uploader, 'generateFileName').callsFake(generateFileNameStub);
 
       let expectedFileInformation = {
         size: 3883,
         type: 'image/jpeg',
-        name: 'file1',
-        full_path: '/directory/file1.jpg'
+        name: 'file1.jpg',
+        fullPath: '/directory/file1.jpg'
       };
 
       uploader.setupImage(statics.validImage);

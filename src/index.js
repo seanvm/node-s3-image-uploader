@@ -1,6 +1,7 @@
 'use strict';
 
 const AWS = require('aws-sdk');
+const s3 = new AWS.S3();
 const fileType = require('file-type');
 const randomstring = require('randomstring');
 
@@ -14,13 +15,19 @@ class Uploader {
     this.buffer = null;
     this.fileExt = null;
     this.fileType = null;
-    this.payload = {};
     this.fileName = '';
   }
 
-  upload(image) {
+  upload(image, callback) {
     this.setupImage(image);
-    this.buildPayload();
+
+    s3.putObject(this.payload(), function(err, data) {
+      if (err) {
+        return console.log(err);
+      }
+
+      callback(data);
+    });
   }
 
   setupImage(image) {
@@ -36,14 +43,16 @@ class Uploader {
     }
   }
 
-  buildPayload() {
+  payload() {
     return {
-      'fileInformation': this.getFileInformation()
+      Bucket: this.bucketName,
+      Key: this.getFileInformation().fullPath,
+      Body: this.buffer
     };
   }
 
   getFilePath() {
-    return typeof this.options.filePath === 'undefined' ? '/' : this.options.filePath;
+    return typeof this.options.filePath === 'undefined' ? '' : this.options.filePath;
   }
 
   getFileInformation() {
@@ -51,12 +60,13 @@ class Uploader {
       size: this.fileSize,
       type: this.fileType,
       name: this.fileName,
-      full_path: this.getFilePath() + this.fileName + '.' + this.fileExt
+      fullPath: this.getFilePath() + this.fileName
     };
   }
 
   generateFileName() {
     // TODO: Allow for this to be passed via options
+    // TODO: Allow for a timestamp to be attached to the filename
     return randomstring.generate() + '.' + this.fileExt;
   }
 
