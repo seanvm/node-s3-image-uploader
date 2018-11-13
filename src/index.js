@@ -37,18 +37,33 @@ class Uploader {
   }
 
   buildPayload() {
-
+    return {
+      'fileInformation': this.getFileInformation()
+    };
   }
 
   getFilePath() {
     return typeof this.options.filePath === 'undefined' ? '/' : this.options.filePath;
   }
 
+  getFileInformation() {
+    return {
+      size: this.fileSize,
+      type: this.fileType,
+      name: this.fileName,
+      full_path: this.getFilePath() + this.fileName + '.' + this.fileExt
+    };
+  }
+
+  generateFileName() {
+    return randomstring.generate() + '.' + this.fileExt;
+  }
+
   setFileInformation() {
     this.fileExt = this.fileMime.ext;
     this.fileType = this.fileMime.mime;
 
-    this.fileName = randomstring.generate() + '.' + this.fileExt;
+    this.fileName = this.generateFileName();
     this.fileSize = this.buffer.toString('ascii').length;
   }
 };
