@@ -18,16 +18,16 @@ class Uploader {
     this.fileName = '';
   }
 
-  upload(image, callback) {
+  async upload(image, callback) {
     this.setupImage(image);
 
-    s3.putObject(this.payload(), function(err, data) {
-      if (err) {
-        callback(err);
-      }
-
-      callback(data);
-    });
+    try {
+      let results = await s3.putObject(this.payload()).promise();
+      results.fileInformation = this.getFileInformation();
+      callback(results);
+    } catch (error) {
+      callback(error);
+    }
   }
 
   setupImage(image) {
