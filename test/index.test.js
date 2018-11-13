@@ -25,5 +25,10 @@ describe('Uploader', () => {
       var uploader = new Uploader('xyz.com', options);
       expect(uploader.getFilePath()).to.equal('/img');
     });
+
+    it('should default to root if no user specified path', () => {
+      var uploader = new Uploader('xyz.com');
+      expect(uploader.getFilePath()).to.equal('/');
+    });
   });
 });
