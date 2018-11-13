@@ -23,7 +23,7 @@ class Uploader {
 
     s3.putObject(this.payload(), function(err, data) {
       if (err) {
-        return console.log(err);
+        callback(err);
       }
 
       callback(data);
