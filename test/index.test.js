@@ -3,7 +3,12 @@ import Uploader from '../src/index.js';
 import statics from './resources/statics';
 
 const expect = require('chai').expect;
+const chai = require('chai');
+const chaiAsPromised = require('chai-as-promised');
 const sinon = require('sinon');
+
+// set up the middleware
+chai.use(chaiAsPromised);
 
 describe('Uploader', () => {
   describe('constructor', () => {
@@ -14,9 +19,11 @@ describe('Uploader', () => {
   });
 
   describe('upload()', () => {
-    it('should throw an error for an invalid file type', () => {
+    it('should throw an error for an invalid file type', async() => {
       var uploader = new Uploader('xyz.com');
-      expect(() => uploader.upload(statics.invalidImage)).to.throw('Invalid file type.');
+      await expect(
+        uploader.upload(statics.invalidImage)
+      ).to.be.rejectedWith('Invalid file type.');
     });
   });
 
