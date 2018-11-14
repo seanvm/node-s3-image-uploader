@@ -1,15 +1,15 @@
 {
   "name": "node-s3-image-uploader",
   "version": "1.0.0",
-  "description": "A simple wrapper of AWS s3 API for uploading images to s3.",
+  "description": "A simple Node.js wrapper of the AWS SDK for uploading images to S3.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha --require @babel/register test/*.test.js",
     "build": "./node_modules/.bin/babel src --out-dir lib",
     "prepare": "npm run build"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Sean van Mulligen <sean@vanmulligen.ca> (https://github.com/seanvm)",
+  "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.353.0",
     "file-type": "^10.4.0",
