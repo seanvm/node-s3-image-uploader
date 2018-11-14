@@ -1,0 +1,2 @@
+# node-s3-image-uploader
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/fce975cfdd5e4ceabe55350542398c87)](https://app.codacy.com/app/sean_13/node-s3-image-uploader?utm_source=github.com&utm_medium=referral&utm_content=seanvm/node-s3-image-uploader&utm_campaign=Badge_Grade_Dashboard)
