@@ -1,6 +1,6 @@
 {
   "name": "node-s3-image-uploader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple Node.js wrapper of the AWS SDK for uploading images to S3.",
   "main": "lib/index.js",
   "scripts": {
