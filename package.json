@@ -10,6 +10,22 @@
   },
   "author": "Sean van Mulligen <sean@vanmulligen.ca> (https://github.com/seanvm)",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seanvm/node-s3-image-uploader.git"
+  },
+  "keywords": [
+    "node",
+    "aws",
+    "s3",
+    "image",
+    "uploader",
+    "serverless"
+  ],
+  "bugs": {
+    "url": "https://github.com/seanvm/node-s3-image-uploader/issues"
+  },
+  "homepage": "https://github.com/seanvm/node-s3-image-uploader#readme",
   "dependencies": {
     "aws-sdk": "^2.353.0",
     "file-type": "^10.4.0",
