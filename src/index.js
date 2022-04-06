@@ -32,7 +32,7 @@ class Uploader {
 
   setupImage(image) {
     this.buffer = Buffer.from(image, 'base64');
-    this.fileMime = fileType(this.buffer);
+    this.fileMime = fileType(this.buffer) || null;
     this.validateImage();
     this.setFileInformation();
   }

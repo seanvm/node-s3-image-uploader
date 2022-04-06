@@ -28,7 +28,7 @@
   "homepage": "https://github.com/seanvm/node-s3-image-uploader#readme",
   "dependencies": {
     "aws-sdk": "^2.353.0",
-    "file-type": "^10.4.0",
+    "file-type": "^11.0.0",
     "moment": "^2.22.2",
     "randomstring": "^1.1.5",
     "sha1": "^1.1.1"
